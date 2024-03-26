@@ -1,6 +1,7 @@
 import bodyParser from "body-parser";
 import express from "express";
 // import connection from "./config/connectDB";
+import { Server } from "socket.io";
 import configCors from "./config/cors";
 import configViewEngine from "./config/viewEngine";
 import initApiRoutes from "./routes/api";
@@ -27,6 +28,17 @@ initWebRoutes(app);
 // init api routes
 initApiRoutes(app);
 
-app.listen(PORT, () => {
+const httpServer = app.listen(PORT, () => {
   console.log("Server is running on port = " + PORT);
+});
+
+// Khởi tạo socket.io với server HTTP đã được tạo bởi Express
+const io = new Server(httpServer);
+
+// Xử lý các sự kiện websocket
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
