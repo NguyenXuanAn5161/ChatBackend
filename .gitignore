@@ -1,0 +1,4 @@
+# dinh nghia cac file khong muon day len git
+.evn
+node_modules
+node_modules/*
