@@ -7,7 +7,7 @@ const router = express.Router();
 /** khoi tao nhung route trong day */
 const initWebRoutes = (app) => {
   router.get("/", (req, res) => {
-    return res.send("Hello World");
+    return res.render("index");
   });
 
   return app.use("/", router);
